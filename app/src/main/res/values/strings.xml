@@ -15,4 +15,6 @@
     <string name="birthday_hint">01.10.1984</string>
     <string name="search_here">Search Here</string>
     <string name="logout">Logout</string>
+    <string name="album_list_title">Album list</string>
+    <string name="allowed_characters">qwertzuiopasdfghjklyxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
 </resources>
