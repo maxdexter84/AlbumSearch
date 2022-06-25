@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardViewCourse"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="160dp"
+    android:layout_height="220dp"
+    android:layout_gravity="center"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="15dp"
+    app:cardBackgroundColor="@color/cardview_shadow_end_color"
+    app:cardPreventCornerOverlap="true">
+
+
+    <ImageView
+        android:id="@+id/iv_album_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        tools:src="@tools:sample/backgrounds/scenic"
+        tools:ignore="ContentDescription"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimens_8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_album_name"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            tools:text="Album name"
+            android:fontFamily="@font/roboto_slab"
+            android:textColor="@color/primaryTextColor" />
+
+        <TextView
+            android:id="@+id/tv_album_year"
+            android:fontFamily="@font/roboto_slab"
+            android:layout_marginTop="@dimen/dimen_4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            tools:text="1984"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/edit_text_text_size" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
