@@ -31,7 +31,7 @@
 
     <style name="modifiedEditText" parent="parent">
         <item name="android:textSize">@dimen/edit_text_text_size</item>
-        <item name="android:background">@drawable/container_search</item>
+         <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="viewParent">
@@ -41,7 +41,7 @@
 
     <style name="loginButton" parent="viewParent">
         <item name="android:background">@drawable/ic_login_bk</item>
-        <item name="android:textColor">@color/whiteTextColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:textStyle">bold</item>
     </style>
 </resources>
