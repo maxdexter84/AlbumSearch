@@ -33,6 +33,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -97,4 +101,6 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    implementation "ru.tinkoff.decoro:decoro:1.1.1"
 }
