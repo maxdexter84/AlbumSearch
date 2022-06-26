@@ -61,12 +61,12 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
-            <androidx.appcompat.widget.AppCompatEditText
+            <ru.maxdexter.albumsearch.presenter.customview.masked.MaskedEditText
                 android:id="@+id/et_phone"
                 style="@style/modifiedEditText"
+                app:mask="@string/mask_ru_mobile"
                 android:inputType="phone"
-                android:maxLines="1"
-                android:hint="@string/mobile_number_hint"/>
+                android:maxLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -86,6 +86,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_password"
                 style="@style/modifiedEditText"
+                android:digits="@string/allowed_characters_end_number"
                 android:hint="@string/login_password_hint"
                 android:maxLines="1"
                 android:inputType="textPassword"/>
@@ -97,6 +98,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_password_repeat"
                 style="@style/modifiedEditText"
+                android:digits="@string/allowed_characters_end_number"
                 android:hint="@string/login_password_repeat"
                 android:maxLines="1"
                 android:inputType="textPassword"/>

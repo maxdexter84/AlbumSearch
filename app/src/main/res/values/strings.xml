@@ -17,4 +17,8 @@
     <string name="logout">Logout</string>
     <string name="album_list_title">Album list</string>
     <string name="allowed_characters">qwertzuiopasdfghjklyxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
+    <string name="allowed_characters_end_number">qwertzuiopasdfghjklyxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789</string>
+    <string name="mask_ru_mobile">+7(###)###-##-##</string>
+    <string name="et_email_error" translatable="false">enter the correct email address</string>
+    <string name="error_password_validation">the password must have at least 6 characters, contain numbers, letters of the upper and lower register</string>
 </resources>
