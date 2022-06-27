@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import ru.maxdexter.albumsearch.domain.common.Preferences
 import ru.maxdexter.albumsearch.domain.common.ValidationHelper
 import ru.maxdexter.albumsearch.domain.usecases.GetUserUseCase
 import ru.maxdexter.albumsearch.presenter.model.UIUser
@@ -15,7 +16,10 @@ import ru.maxdexter.albumsearch.utils.mapToUIUser
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val useCase: GetUserUseCase) : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val useCase: GetUserUseCase,
+    private val preferences: Preferences
+) : ViewModel() {
 
 
     private val _currentUser = MutableStateFlow<UIUser?>(null)
@@ -43,6 +47,12 @@ class LoginViewModel @Inject constructor(private val useCase: GetUserUseCase) : 
                     password
                 )
             } == FieldState.VALID_FIELD
+    }
+
+    fun saveLoggedUser(state: FieldState) {
+        if (state == FieldState.VALID_FIELD) {
+            preferences
+        }
     }
 
 
