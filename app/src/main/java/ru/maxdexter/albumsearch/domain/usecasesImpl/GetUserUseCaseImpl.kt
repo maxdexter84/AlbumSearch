@@ -11,4 +11,8 @@ class GetUserUseCaseImpl @Inject constructor(private val repository: LocalReposi
     override fun getUser(): Flow<List<User>> {
        return repository.getAllUser()
     }
+
+    override fun getUserByEmail(email: String): Flow<User> {
+        return repository.getUser(email)
+    }
 }

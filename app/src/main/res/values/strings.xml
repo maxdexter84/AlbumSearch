@@ -25,5 +25,6 @@
     <string name="error_not_an_adult_validation">Only for 18+</string>
     <string name="error_email_validation" translatable="false">enter the correct email address</string>
     <string name="error_password_validation">the password must have at least 6 characters, contain numbers, letters of the upper and lower register</string>
+    <string name="error_enter_password">invalid username or password</string>
     <string name="error_password_repeat_validation">the field must be filled in</string>
 </resources>
