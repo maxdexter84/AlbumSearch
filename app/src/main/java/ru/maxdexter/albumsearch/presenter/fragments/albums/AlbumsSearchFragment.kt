@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import ru.maxdexter.albumsearch.R
-
+@AndroidEntryPoint
 class AlbumsSearchFragment : Fragment() {
 
     companion object {

@@ -12,13 +12,18 @@
     <string name="login_background">login background</string>
     <string name="login_password_repeat">Repeat password</string>
     <string name="surname_hint">Surname</string>
-    <string name="birthday_hint">01.10.1984</string>
+    <string name="birthday_hint">01101984</string>
     <string name="search_here">Search Here</string>
     <string name="logout">Logout</string>
     <string name="album_list_title">Album list</string>
     <string name="allowed_characters">qwertzuiopasdfghjklyxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
     <string name="allowed_characters_end_number">qwertzuiopasdfghjklyxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789</string>
+    <string name="allowed_number">0123456789</string>
     <string name="mask_ru_mobile">+7(###)###-##-##</string>
-    <string name="et_email_error" translatable="false">enter the correct email address</string>
+    <string name="mask_date">##.##.####</string>
+    <string name="error_empty_field_validation">the field must be filled in</string>
+    <string name="error_not_an_adult_validation">Only for 18+</string>
+    <string name="error_email_validation" translatable="false">enter the correct email address</string>
     <string name="error_password_validation">the password must have at least 6 characters, contain numbers, letters of the upper and lower register</string>
+    <string name="error_password_repeat_validation">the field must be filled in</string>
 </resources>
