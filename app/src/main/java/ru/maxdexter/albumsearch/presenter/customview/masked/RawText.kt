@@ -1,16 +1,10 @@
 package ru.maxdexter.albumsearch.presenter.customview.masked
 
-/**
- * Raw text, another words TextWithout mask characters
- */
+
 class RawText {
     var text = ""
         private set
 
-    /**
-     * text = 012345678, range = 123 =&gt; text = 0456789
-     * @param range given range
-     */
     fun subtractFromString(range: Range) {
         var firstPart = ""
         var lastPart = ""
@@ -23,13 +17,6 @@ class RawText {
         text = firstPart + lastPart
     }
 
-    /**
-     *
-     * @param newString New String to be added
-     * @param start Position to insert newString
-     * @param maxLength Maximum raw text length
-     * @return Number of added characters
-     */
     fun addToString(newString: String?, start: Int, maxLength: Int): Int {
         var str = newString
         var firstPart = EMPTY_STRING

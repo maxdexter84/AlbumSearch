@@ -1,27 +1,62 @@
 package ru.maxdexter.albumsearch.presenter.fragments.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import ru.maxdexter.albumsearch.R
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import ru.maxdexter.albumsearch.databinding.FragmentDetailBinding
+import ru.maxdexter.albumsearch.presenter.adapters.trackadapter.TrackAdapter
+import ru.maxdexter.albumsearch.presenter.baseclass.BaseFragment
+import ru.maxdexter.albumsearch.utils.setImage
 
 @AndroidEntryPoint
-class DetailFragment : Fragment() {
+class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate) {
 
-    companion object {
-        fun newInstance() = DetailFragment()
+    private val id: String? by lazy {
+        arguments?.let { DetailFragmentArgs.fromBundle(it).albumId }
     }
 
-    private lateinit var viewModel: DetailViewModel
+    private val adapter: TrackAdapter by lazy {
+        TrackAdapter()
+    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_detail, container, false)
+    private val viewModel: DetailViewModel by viewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loadData()
+        albumInfoObserver()
+        trackListObserver()
+        binding.rvSongsList.adapter = adapter
+        binding.albumToolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+    }
+
+    private fun trackListObserver() {
+        viewModel.trackList.onEach {
+            adapter.submitList(it)
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun albumInfoObserver() {
+        viewModel.albumData.onEach {
+            it?.let {
+                binding.albumToolbar.title = it.name
+                binding.albumToolbar.subtitle = "${it.artisName} ${it.date}"
+                binding.ivAlbumCover.setImage(it.cover)
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun loadData() {
+        id?.let {
+            viewModel.loadAlbumMetaData(it)
+            viewModel.getTracks(it)
+        }
+
     }
 
 

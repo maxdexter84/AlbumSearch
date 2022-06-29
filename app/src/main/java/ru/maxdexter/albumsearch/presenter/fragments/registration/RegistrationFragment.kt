@@ -32,13 +32,24 @@ class RegistrationFragment :
         surnameObserver()
         birthdayObserver()
         emailObserver()
-        passworOneObserver()
+        passwordOneObserver()
         passwordTwoObserver()
         btnClickListener()
         binding.tvSignIn.setOnClickListener {
             navigateTo()
         }
 
+        viewModel.registrationBtnState.onEach {
+            if (it) navigateTo()
+        }.launchIn(lifecycleScope)
+
+        viewModel.phoneState.onEach {
+            when (it) {
+                FieldState.NOT_VALID_FIELD -> binding.etPhone.error =
+                    getString(R.string.error_phone_number)
+                else -> it?.let { fieldState -> editTextChange(fieldState, binding.etPhone) }
+            }
+        }.launchIn(lifecycleScope)
 
     }
 
@@ -82,7 +93,7 @@ class RegistrationFragment :
         }.launchIn(lifecycleScope)
     }
 
-    private fun passworOneObserver() {
+    private fun passwordOneObserver() {
         viewModel.passwordOneState.onEach {
             when (it) {
                 FieldState.NOT_VALID_FIELD -> binding.etPassword.error =
@@ -106,7 +117,7 @@ class RegistrationFragment :
         binding.etBirthday.apply {
             this.setOnClickListener {
                 val listener = DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
-                    val month = if (i2.toString().length< 2)"0$i2" else i2.toString()
+                    val month = if (i2.toString().length < 2) "0$i2" else i2.toString()
                     binding.etBirthday.setText("$i3$month$i")
                 }
                 DatePickerDialog(
@@ -122,7 +133,7 @@ class RegistrationFragment :
 
     private fun editTextChange(fieldState: FieldState, editText: EditText) {
         when (fieldState) {
-            FieldState.EMPTY_FIELD -> editText.error =
+            FieldState.EMPTY_FIELD, FieldState.NOT_VALID_FIELD -> editText.error =
                 getString(R.string.error_empty_field_validation)
             FieldState.VALID_FIELD -> editText.setHintTextColor(android.R.color.holo_green_dark)
             else -> {}
@@ -138,7 +149,7 @@ class RegistrationFragment :
             val birthday = binding.etBirthday.text.toString()
             val password = binding.etPassword.text.toString()
             val passwordTwo = binding.etPasswordRepeat.text.toString()
-           val res =  viewModel.checkIsEmptyString(
+            val res = viewModel.checkIsEmptyString(
                 name = name,
                 surname = surname,
                 birthday = birthday,
@@ -148,9 +159,6 @@ class RegistrationFragment :
                 pass2 = passwordTwo
             )
             viewModel.saveUser(res)
-           // viewModel.checkPasswordTwoFields(password, passwordTwo)
-
-            navigateTo()
 
         }
     }

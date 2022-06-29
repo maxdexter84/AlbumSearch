@@ -15,5 +15,4 @@ object UtilsModule {
     @Provides
     fun provideDispatcher() = Dispatchers.IO
 
-
 }

@@ -60,7 +60,7 @@
                     android:drawableStart="@drawable/ic_baseline_date_range_24"
                     android:digits="@string/allowed_number"
                     app:mask="@string/mask_date"
-                    android:hint="@string/birthday_hint"
+                    android:inputType="date"
                     android:gravity="center_horizontal"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>

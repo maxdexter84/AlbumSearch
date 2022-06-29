@@ -42,7 +42,7 @@ class RegistrationViewModel @Inject constructor(private val useCase: SaveUserUse
     private val _passwordTwoState = MutableStateFlow<FieldState?>(null)
     val passwordTwoState = _passwordTwoState.asStateFlow()
 
-    fun checkField(str: String, fieldType: String): FieldState {
+    private fun checkField(str: String, fieldType: String): FieldState {
         return if (str.isEmpty()) {
             FieldState.EMPTY_FIELD
         } else {
@@ -51,6 +51,7 @@ class RegistrationViewModel @Inject constructor(private val useCase: SaveUserUse
                 EMAIL_TYPE -> ValidationHelper.isValid(str, ValidationHelper.EMAIL_PATTERN)
                 PASSWORD_TYPE -> ValidationHelper.isValid(str, ValidationHelper.PASSWORD_PATTERN)
                 BIRTHDAY_TYPE -> ValidationHelper.birthdayValid(str)
+                PHONE_TYPE -> ValidationHelper.isValid(str, ValidationHelper.PHONE_PATTERN)
                 else -> {
                     FieldState.VALID_FIELD
                 }
@@ -101,7 +102,8 @@ class RegistrationViewModel @Inject constructor(private val useCase: SaveUserUse
             viewModelScope.launch {
                 useCase.saveUser(user.mapToUser())
             }
-        }
+            _registrationBtnState.value = true
+        } else _registrationBtnState.value = false
     }
 
     companion object {

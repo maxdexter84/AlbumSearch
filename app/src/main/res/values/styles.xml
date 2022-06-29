@@ -44,4 +44,10 @@
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="itemTextStyle" parent="viewParent">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:fontFamily">@font/roboto_slab</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
 </resources>

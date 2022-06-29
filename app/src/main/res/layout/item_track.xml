@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_4dp"
+    android:elevation="@dimen/dimen_4dp"
+    app:cardCornerRadius="@dimen/dimen_4dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/dimens_8dp">
+
+        <TextView
+            android:id="@+id/tv_track_number"
+            style="@style/itemTextStyle"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:textSize="@dimen/text_size_18"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/tv_track_name"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_18"
+            tools:text="Kill am all" />
+
+        <TextView
+            android:id="@+id/tv_track_time"
+            style="@style/itemTextStyle"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textSize="@dimen/text_size_18"
+            tools:text="05:45" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.cardview.widget.CardView>
