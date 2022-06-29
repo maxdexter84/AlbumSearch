@@ -4,52 +4,52 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="160dp"
-    android:layout_height="220dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:clickable="true"
-    android:focusable="true"
-    app:cardCornerRadius="15dp"
-    app:cardBackgroundColor="@color/cardview_shadow_end_color"
-    app:cardPreventCornerOverlap="true">
+    android:layout_margin="@dimen/dimens_8dp"
+    app:cardCornerRadius="15dp">
 
-
-    <ImageView
-        android:id="@+id/iv_album_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        tools:src="@tools:sample/backgrounds/scenic"
-        tools:ignore="ContentDescription"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dimens_8dp"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_artist_name"
+            tools:text="Metallica"
+            android:textSize="@dimen/text_size_10"
+            style="@style/itemTextStyle" />
+
+        <TextView
             android:id="@+id/tv_album_name"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:gravity="center"
             tools:text="Album name"
-            android:fontFamily="@font/roboto_slab"
-            android:textColor="@color/primaryTextColor" />
+            android:textSize="@dimen/text_size_10"
+            style="@style/itemTextStyle" />
 
         <TextView
             android:id="@+id/tv_album_year"
-            android:fontFamily="@font/roboto_slab"
-            android:layout_marginTop="@dimen/dimen_4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            style="@style/itemTextStyle"
             tools:text="1984"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/edit_text_text_size" />
+            android:textSize="@dimen/text_size_10"
+             />
+        <TextView
+            android:id="@+id/tv_trek_count"
+            style="@style/itemTextStyle"
+            android:textSize="@dimen/text_size_10"
+            tools:text="14 songs"
+           />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_album_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            tools:src="@tools:sample/backgrounds/scenic"
+            tools:ignore="ContentDescription"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

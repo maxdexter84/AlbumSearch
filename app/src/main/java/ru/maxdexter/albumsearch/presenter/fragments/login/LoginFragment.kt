@@ -21,16 +21,27 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>(LoginFragmentBinding::i
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        signUpListener()
+        loginButtonListener()
+        validUserObserver()
+
+        binding.etPasswordLogin.doOnTextChanged { text, _, _, _ ->
+            text?.let {
+                binding.cirLoginButton.isEnabled = text.length >= 6
+            }
+        }
+
+    }
+
+    private fun signUpListener() {
         binding.tvSignUp.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegistrationFragment())
         }
+    }
 
-        binding.cirLoginButton.setOnClickListener {
-            viewModel.compareUserLoginData(
-                binding.etEmailLogin.text.toString(),
-                binding.etPasswordLogin.text.toString()
-            )
-        }
+    private fun validUserObserver() {
         viewModel.validUser.onEach {
             it?.let {
                 when (it) {
@@ -39,13 +50,15 @@ class LoginFragment : BaseFragment<LoginFragmentBinding>(LoginFragmentBinding::i
                 }
             }
         }.launchIn(lifecycleScope)
+    }
 
-        binding.etPasswordLogin.doOnTextChanged { text, _, _, _ ->
-            text?.let {
-                binding.cirLoginButton.isEnabled = text.length >= 6
-            }
+    private fun loginButtonListener() {
+        binding.cirLoginButton.setOnClickListener {
+            viewModel.compareUserLoginData(
+                binding.etEmailLogin.text.toString(),
+                binding.etPasswordLogin.text.toString()
+            )
         }
-
     }
 
 

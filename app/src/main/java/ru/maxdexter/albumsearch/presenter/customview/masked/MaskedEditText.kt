@@ -1,20 +1,18 @@
 package ru.maxdexter.albumsearch.presenter.customview.masked
 
-import androidx.appcompat.widget.AppCompatEditText
-import android.text.TextWatcher
-import android.widget.TextView.OnEditorActionListener
-import ru.maxdexter.albumsearch.R
-import android.os.Parcelable
-import android.os.Bundle
 import android.content.ContentValues
 import android.content.Context
+import android.os.Bundle
+import android.os.Parcelable
 import android.text.Editable
 import android.text.SpannableStringBuilder
+import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.util.Log
-import java.lang.RuntimeException
-import java.lang.StringBuilder
+import android.widget.TextView.OnEditorActionListener
+import androidx.appcompat.widget.AppCompatEditText
+import ru.maxdexter.albumsearch.R
 
 class MaskedEditText : AppCompatEditText, TextWatcher {
     private val onEditorActionListener = OnEditorActionListener { v, actionId, event ->
@@ -64,7 +62,6 @@ class MaskedEditText : AppCompatEditText, TextWatcher {
         keepHint = attributes.getBoolean(R.styleable.MaskedEditText_keep_hint, false)
         cleanUp()
 
-        // Ignoring enter key presses if needed
         if (!enableImeAction) {
             setOnEditorActionListener(onEditorActionListener)
         } else {
@@ -92,14 +89,9 @@ class MaskedEditText : AppCompatEditText, TextWatcher {
     }
 
     override fun setText(text: CharSequence, type: BufferType) {
-//		if (text == null || text.equals("")) return;
         super.setText(text, type)
     }
 
-    /**
-     * @param listener - its onFocusChange() method will be called before performing MaskedEditText operations,
-     * related to this event.
-     */
     override fun setOnFocusChangeListener(listener: OnFocusChangeListener) {
         focusChangeListener = listener
     }
@@ -188,14 +180,6 @@ class MaskedEditText : AppCompatEditText, TextWatcher {
         return charRepresentation
     }
 
-    /**
-     * Generates positions for values characters. For instance:
-     * Input data: mask = "+7(###)###-##-##
-     * After method execution:
-     * rawToMask = [3, 4, 5, 6, 8, 9, 11, 12, 14, 15]
-     * maskToRaw = [-1, -1, -1, 0, 1, 2, -1, 3, 4, 5, -1, 6, 7, -1, 8, 9]
-     * charsInMask = "+7()- " (and space, yes)
-     */
     private fun generatePositionArrays() {
         val aux = IntArray(mask!!.length)
         maskToRaw = IntArray(mask!!.length)
@@ -269,7 +253,8 @@ class MaskedEditText : AppCompatEditText, TextWatcher {
                 val addedString = s.subSequence(start, start + cnt).toString()
                 cnt = rawText!!.addToString(clear(addedString), startingPosition, maxRawLength)
                 if (initialized) {
-                    val currentPosition: Int = if (startingPosition + cnt < rawToMask.size) rawToMask[startingPosition + cnt] else lastValidMaskPosition + 1
+                    val currentPosition: Int =
+                        if (startingPosition + cnt < rawToMask.size) rawToMask[startingPosition + cnt] else lastValidMaskPosition + 1
                     selection1 = nextValidPosition(currentPosition)
                 }
             }
@@ -293,7 +278,7 @@ class MaskedEditText : AppCompatEditText, TextWatcher {
         }
     }
 
-     fun isKeepHint(): Boolean {
+    fun isKeepHint(): Boolean {
         return keepHint
     }
 
@@ -303,8 +288,6 @@ class MaskedEditText : AppCompatEditText, TextWatcher {
     }
 
     override fun onSelectionChanged(selStart: Int, selEnd: Int) {
-        // On Android 4+ this method is being called more than 1 time if there is a hint in the EditText, what moves the cursor to left
-        // Using the boolean var selectionChanged to limit to one execution
         var selStart = selStart
         var selEnd = selEnd
         if (initialized) {
@@ -312,17 +295,14 @@ class MaskedEditText : AppCompatEditText, TextWatcher {
                 selStart = fixSelection(selStart)
                 selEnd = fixSelection(selEnd)
 
-                // exactly in this order. If getText.length() == 0 then selStart will be -1
                 if (selStart > text!!.length) selStart = text!!.length
                 if (selStart < 0) selStart = 0
 
-                // exactly in this order. If getText.length() == 0 then selEnd will be -1
                 if (selEnd > text!!.length) selEnd = text!!.length
                 if (selEnd < 0) selEnd = 0
                 setSelection(selStart, selEnd)
                 selectionChanged = true
             } else {
-                //check to see if the current selection is outside the already entered text
                 if (selStart > rawText!!.length() - 1) {
                     val start = fixSelection(selStart)
                     val end = fixSelection(selEnd)

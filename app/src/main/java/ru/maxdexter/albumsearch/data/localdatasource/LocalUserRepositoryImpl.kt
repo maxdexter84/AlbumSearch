@@ -10,14 +10,14 @@ import ru.maxdexter.albumsearch.data.localdatasource.database.UserDao
 import ru.maxdexter.albumsearch.data.mappers.mapToDbUser
 import ru.maxdexter.albumsearch.data.mappers.mapToUser
 import ru.maxdexter.albumsearch.domain.model.User
-import ru.maxdexter.albumsearch.domain.repositories.LocalRepository
+import ru.maxdexter.albumsearch.domain.repositories.LocalUserRepository
 import javax.inject.Inject
 
-class LocalRepositoryImpl @Inject constructor(
+class LocalUserRepositoryImpl @Inject constructor(
     private val dao: UserDao,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) :
-    LocalRepository {
+    LocalUserRepository {
     override fun getUser(email: String): Flow<User> {
         return dao.getUserById(email).map { it.mapToUser() }.flowOn(dispatcher)
     }

@@ -4,12 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import ru.maxdexter.albumsearch.domain.usecases.DeleteUserUseCase
-import ru.maxdexter.albumsearch.domain.usecases.GetUserUseCase
-import ru.maxdexter.albumsearch.domain.usecases.SaveUserUseCase
-import ru.maxdexter.albumsearch.domain.usecasesImpl.DeleteUserUseCaseImpl
-import ru.maxdexter.albumsearch.domain.usecasesImpl.GetUserUseCaseImpl
-import ru.maxdexter.albumsearch.domain.usecasesImpl.SaveUserUserUseCaseImpl
+import ru.maxdexter.albumsearch.domain.usecases.*
+import ru.maxdexter.albumsearch.domain.usecasesImpl.*
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -23,4 +19,13 @@ abstract class UseCaseModule {
 
     @Binds
     abstract fun bindGetAllUserUseCase(useCase: GetUserUseCaseImpl): GetUserUseCase
+
+    @Binds
+    abstract fun bindGetAlbumsByArtisNameUseCase(useCase: GetAlbumsByArtistNameUseCaseImpl): GetAlbumsByArtistNameUseCase
+
+    @Binds
+    abstract fun bindGetAlbumsFromDbUseCase(useCase: GetAlbumsFromDbUseCaseImpl): GetAlbumsFromDbUseCase
+
+    @Binds
+    abstract fun bindGetTracksByAlbumId(useCase: GetTracksByAlbumIdUseCaseImpl): GetTracksByAlbumIdUseCase
 }

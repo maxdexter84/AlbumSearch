@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import ru.maxdexter.albumsearch.domain.common.Preferences
 import ru.maxdexter.albumsearch.domain.common.ValidationHelper
 import ru.maxdexter.albumsearch.domain.usecases.GetUserUseCase
+import ru.maxdexter.albumsearch.presenter.AppPreferences
 import ru.maxdexter.albumsearch.presenter.model.UIUser
 import ru.maxdexter.albumsearch.utils.FieldState
 import ru.maxdexter.albumsearch.utils.mapToUIUser
@@ -23,35 +24,37 @@ class LoginViewModel @Inject constructor(
 
 
     private val _currentUser = MutableStateFlow<UIUser?>(null)
-    val currentUser = _currentUser.asStateFlow()
 
     private val _validUser = MutableStateFlow<Boolean?>(null)
     val validUser = _validUser.asStateFlow()
 
 
-    private fun loadUser(email: String) {
+    fun compareUserLoginData(email: String, password: String) {
         viewModelScope.launch {
             useCase.getUserByEmail(email).map { user -> user.mapToUIUser() }.collect {
                 _currentUser.value = it
+                val compareRes =
+                    it.let {
+                        ValidationHelper.passwordTheSame(
+                            it.hashPassword,
+                            password
+                        )
+                    } == FieldState.VALID_FIELD
+                _validUser.value = compareRes
+                saveLoggedUser(compareRes)
             }
         }
     }
 
-
-    fun compareUserLoginData(email: String, password: String) {
-        loadUser(email)
-        _validUser.value =
-            _currentUser.value?.let {
-                ValidationHelper.passwordTheSame(
-                    it.hashPassword,
-                    password
+    private fun saveLoggedUser(state: Boolean) {
+        if (state) {
+            preferences.setIsLogin(AppPreferences.LOGGED_KEY, true)
+            _currentUser.value?.email?.let {
+                preferences.setLoggedUserEmail(
+                    AppPreferences.EMAIL_KEY,
+                    it
                 )
-            } == FieldState.VALID_FIELD
-    }
-
-    fun saveLoggedUser(state: FieldState) {
-        if (state == FieldState.VALID_FIELD) {
-            preferences
+            }
         }
     }
 

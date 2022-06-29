@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import ru.maxdexter.albumsearch.domain.common.Preferences
 import javax.inject.Inject
 
-class AppPreferences @Inject constructor(context: Context) : Preferences  {
+class AppPreferences @Inject constructor(context: Context) : Preferences {
     private val preferences: SharedPreferences =
         context.getSharedPreferences("App_Pref", Context.MODE_PRIVATE)
 
@@ -27,6 +27,8 @@ class AppPreferences @Inject constructor(context: Context) : Preferences  {
     }
 
     companion object {
+        const val EMAIL_KEY = "EMAIL_KEY"
+        const val LOGGED_KEY = "LOGGED_KEY"
         const val DEFAULT_LOGGED_VALUE = false
         const val DEFAULT_EMAIL_VALUE = ""
     }

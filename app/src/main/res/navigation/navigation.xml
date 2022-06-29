@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation.xml"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/albumsSearchFragment">
 
     <fragment
         android:id="@+id/albumsSearchFragment"
@@ -11,7 +11,8 @@
         android:label="AlbumsSearchFragment" >
         <action
             android:id="@+id/action_albumsSearchFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment"
+            app:popUpTo="@id/albumsSearchFragment" />
         <action
             android:id="@+id/action_albumsSearchFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -39,5 +40,12 @@
         android:id="@+id/detailFragment"
         android:name="ru.maxdexter.albumsearch.presenter.fragments.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="albumId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailFragment_to_albumsSearchFragment"
+            app:destination="@id/albumsSearchFragment" />
+    </fragment>
 </navigation>

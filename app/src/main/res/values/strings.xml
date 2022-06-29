@@ -27,4 +27,8 @@
     <string name="error_password_validation">the password must have at least 6 characters, contain numbers, letters of the upper and lower register</string>
     <string name="error_enter_password">invalid username or password</string>
     <string name="error_password_repeat_validation">the field must be filled in</string>
+    <string name="error_phone_number">incomplete phone number</string>
+    <string name="error_network">Data not loading</string>
+    <string name="toolbar_btn_back">Back</string>
+    <string name="snackbar_repeat_btn_title">Repeat</string>
 </resources>
